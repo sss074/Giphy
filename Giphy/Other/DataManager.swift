@@ -13,7 +13,8 @@ import SDWebImage
 class DataManager: NSObject {
     
     static let sharedInstance = DataManager()
-
+    var queue : OperationQueue
+    var queueGif : OperationQueue
     
     //MARK: - CoreData stack
     
@@ -51,11 +52,21 @@ class DataManager: NSObject {
         return managedObjectContext
     }()
 
+    override init() {
+        
+        queue = OperationQueue()
+        queue.maxConcurrentOperationCount = 1;
+        queueGif = OperationQueue()
+        queueGif.maxConcurrentOperationCount = 1;
+    }
     //MARK: - Public methods
     
     func saveItems(_ content : Array<GiphyModel>){
 
+        queue.cancelAllOperations()
+        queueGif.cancelAllOperations()
         self.removeItems()
+        
         for obj in content{
             let item = NSEntityDescription.insertNewObject(forEntityName: "GiphyData",
                                                            into: self.managedObjectContext) as! GiphyData
@@ -166,12 +177,11 @@ class DataManager: NSObject {
     fileprivate func loadTmbls (_ content:Array<GiphyModel>){
         
         
-        let serialQueue: DispatchQueue = DispatchQueue(label: "com.iosbrain.SerialImageQueue")
+       // let serialQueue: DispatchQueue = DispatchQueue(label: "com.iosbrain.SerialImageQueue")
         
         for obj in content{
             
-            serialQueue.sync {
-                
+            let operation : BlockOperation = BlockOperation(block: {
                 let manager:SDWebImageManager = SDWebImageManager.shared()
                 let requestURL:NSURL = URL(string:obj.imageUrl)! as NSURL
                 
@@ -184,25 +194,54 @@ class DataManager: NSObject {
                         }
                     }
                 }
-                
-            }
+            })
+            
+            queue.addOperation(operation);
+            
+//            if ( queue.operations.count != 0 ){
+//                operation.addDependency((queue.operations.last)!);
+//            }
+            
+//            serialQueue.sync {
+//
+//                let manager:SDWebImageManager = SDWebImageManager.shared()
+//                let requestURL:NSURL = URL(string:obj.imageUrl)! as NSURL
+//
+//                manager.loadImage(with: requestURL as URL, options: SDWebImageOptions.highPriority, progress: { (start, progress, url) in
+//
+//                }) { (image, data, error, cached, finished, url) in
+//                    if (error == nil && (image != nil) && finished) {
+//                        DispatchQueue.main.async {
+//                            self.updateThmblItem(image!, obj)
+//                        }
+//                    }
+//                }
+//
+//            }
         }
     }
     
     fileprivate func loadGif (_ content:Array<GiphyModel>){
-        
-        
-        let serialQueue: DispatchQueue = DispatchQueue(label: "com.iosbrain.SerialGifImageQueue")
+        //let serialQueue: DispatchQueue = DispatchQueue(label: "com.iosbrain.SerialGifImageQueue")
         
         for obj in content{
-            
-            serialQueue.sync {
+            let operation : BlockOperation = BlockOperation(block: {
                 let imageURL = UIImage.gifImageWithURL(obj.imageUrl!)
                 DispatchQueue.main.async {
                     let image = UIImageView(image: imageURL).image
                     self.updateGifItem(image!, obj)
                 }
-            }
+            })
+            
+            queueGif.addOperation(operation);
+                
+//            serialQueue.sync {
+//                let imageURL = UIImage.gifImageWithURL(obj.imageUrl!)
+//                DispatchQueue.main.async {
+//                    let image = UIImageView(image: imageURL).image
+//                    self.updateGifItem(image!, obj)
+//                }
+//            }
         }
     }
 }
