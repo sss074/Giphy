@@ -10,8 +10,8 @@ import UIKit
 
 
 protocol ListControllerDelegate : NSObjectProtocol {
-    func listContent(param: String)
-    func selectItem(param: GiphyModel, target: UINavigationController)
+    func listContent(_ : String)
+    func selectItem(_ : GiphyModel, _ : UINavigationController)
 }
 
 class ListController: UIViewController, CooordinatorDelegate, UISearchBarDelegate, UICollectionViewDelegate, UICollectionViewDataSource,UICollectionViewDelegateFlowLayout {
@@ -30,7 +30,7 @@ class ListController: UIViewController, CooordinatorDelegate, UISearchBarDelegat
   
         title = "GIPHY SEARCH"
         clearSearchBar(searchBar)
-        Cooordinator.sharedInstance.listContent(param:Constants.SEARCHEMPTY)
+        Cooordinator.sharedInstance.listContent(Constants.SEARCHEMPTY)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -47,7 +47,7 @@ class ListController: UIViewController, CooordinatorDelegate, UISearchBarDelegat
     
     //MARK: - Coordinator delegate
     
-    func updateContent(content: Array<GiphyModel>) {
+    func updateContent(_ content: Array<GiphyModel>) {
         lisContent.removeAllObjects()
         lisContent.addObjects(from: content)
         print(lisContent ?? "")
@@ -85,7 +85,7 @@ class ListController: UIViewController, CooordinatorDelegate, UISearchBarDelegat
     //MARK: -  UISearchBar delagate
     
     internal func searchBarSearchButtonClicked(_ searchBar: UISearchBar){
-        Cooordinator.sharedInstance.listContent(param:parseSearch(searchBar)!)
+        Cooordinator.sharedInstance.listContent(parseSearch(searchBar)!)
         searchBar.resignFirstResponder()
     }
    
@@ -97,7 +97,7 @@ class ListController: UIViewController, CooordinatorDelegate, UISearchBarDelegat
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar){
         searchBar.resignFirstResponder()
         clearSearchBar(searchBar)
-        Cooordinator.sharedInstance.listContent(param:Constants.SEARCHEMPTY)
+        Cooordinator.sharedInstance.listContent(Constants.SEARCHEMPTY)
     }
     
     //MARK: -  UICollectionView delagate
@@ -122,7 +122,7 @@ class ListController: UIViewController, CooordinatorDelegate, UISearchBarDelegat
     internal func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath){
         
         let  obj:GiphyModel = lisContent[indexPath.row] as! GiphyModel
-        Cooordinator.sharedInstance.selectItem(param: obj, target: self.navigationController!)
+        Cooordinator.sharedInstance.selectItem(obj, self.navigationController!)
     }
     
     

@@ -15,6 +15,8 @@ class GiphyModel: NSObject {
     var id: String!
     var imageUrl: String!
     var import_datetime: String!
+    var imageThmbl: UIImage?
+    var imageGif: UIImage?
     
     
     fileprivate func formatTime(_ param: NSDictionary) {
@@ -37,6 +39,8 @@ class GiphyModel: NSObject {
         }
     }
     
+    override init() {
+    }
     init(param: NSDictionary) {
         
         super.init()

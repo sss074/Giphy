@@ -20,6 +20,8 @@
 		EF6E85881FAA15DD0042FE3C /* GiphyModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF6E85871FAA15DD0042FE3C /* GiphyModel.swift */; };
 		EFC701B01FAA843A0000CBA3 /* ListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFC701AF1FAA843A0000CBA3 /* ListCell.swift */; };
 		EFC701B21FAA8E510000CBA3 /* DetailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFC701B11FAA8E510000CBA3 /* DetailController.swift */; };
+		EFC701B61FAB224D0000CBA3 /* Giphy.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = EFC701B41FAB224D0000CBA3 /* Giphy.xcdatamodeld */; };
+		EFC701C01FAB24E80000CBA3 /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFC701BF1FAB24E80000CBA3 /* DataManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -40,6 +42,8 @@
 		EF6E85871FAA15DD0042FE3C /* GiphyModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GiphyModel.swift; sourceTree = "<group>"; };
 		EFC701AF1FAA843A0000CBA3 /* ListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListCell.swift; sourceTree = "<group>"; };
 		EFC701B11FAA8E510000CBA3 /* DetailController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailController.swift; sourceTree = "<group>"; };
+		EFC701B51FAB224D0000CBA3 /* Giphy.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Giphy.xcdatamodel; sourceTree = "<group>"; };
+		EFC701BF1FAB24E80000CBA3 /* DataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -91,6 +95,7 @@
 				EF6E85761FAA04000042FE3C /* Info.plist */,
 				EF6E85711FAA04000042FE3C /* Assets.xcassets */,
 				EFDF80221FAA7228000DE717 /* Cells */,
+				EFC701B31FAB22200000CBA3 /* Core Data */,
 				EF6E85801FAA0C490042FE3C /* Other */,
 				EF6E857C1FAA058B0042FE3C /* Extensions */,
 			);
@@ -110,10 +115,19 @@
 			children = (
 				EF6E85831FAA0F060042FE3C /* Cooordinator.swift */,
 				EF6E85851FAA0F360042FE3C /* BackService.swift */,
+				EFC701BF1FAB24E80000CBA3 /* DataManager.swift */,
 				EF6E85871FAA15DD0042FE3C /* GiphyModel.swift */,
 				EF2C114F1FAA418D00F7617D /* Constants.swift */,
 			);
 			path = Other;
+			sourceTree = "<group>";
+		};
+		EFC701B31FAB22200000CBA3 /* Core Data */ = {
+			isa = PBXGroup;
+			children = (
+				EFC701B41FAB224D0000CBA3 /* Giphy.xcdatamodeld */,
+			);
+			path = "Core Data";
 			sourceTree = "<group>";
 		};
 		EFDF80221FAA7228000DE717 /* Cells */ = {
@@ -263,6 +277,8 @@
 				EF6E85881FAA15DD0042FE3C /* GiphyModel.swift in Sources */,
 				EFC701B01FAA843A0000CBA3 /* ListCell.swift in Sources */,
 				EF6E857F1FAA06520042FE3C /* iOSDevCenters+GIF.swift in Sources */,
+				EFC701B61FAB224D0000CBA3 /* Giphy.xcdatamodeld in Sources */,
+				EFC701C01FAB24E80000CBA3 /* DataManager.swift in Sources */,
 				EFC701B21FAA8E510000CBA3 /* DetailController.swift in Sources */,
 				EF6E856B1FAA04000042FE3C /* AppDelegate.swift in Sources */,
 			);
@@ -451,6 +467,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		EFC701B41FAB224D0000CBA3 /* Giphy.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				EFC701B51FAB224D0000CBA3 /* Giphy.xcdatamodel */,
+			);
+			currentVersion = EFC701B51FAB224D0000CBA3 /* Giphy.xcdatamodel */;
+			path = Giphy.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = EF6E855F1FAA04000042FE3C /* Project object */;
 }

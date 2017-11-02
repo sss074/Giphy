@@ -9,7 +9,7 @@
 import UIKit
 
 protocol CooordinatorDelegate : NSObjectProtocol {
-    func updateContent(content:  Array<GiphyModel>)
+    func updateContent(_ :  Array<GiphyModel>)
 }
 
 class Cooordinator: NSObject, ListControllerDelegate {
@@ -17,17 +17,17 @@ class Cooordinator: NSObject, ListControllerDelegate {
     static let sharedInstance = Cooordinator()
     weak var delegate: CooordinatorDelegate?
     
-    func listContent(param: String){
+    func listContent(_ param: String){
         BackService.sharedInstance.data_request(param: param, completion: { (result: NSArray) in
             let temp = NSMutableArray()
             for obj in result {
                 temp .add(GiphyModel(param: obj as! NSDictionary))
             }
-            self.delegate?.updateContent(content: temp as! Array<GiphyModel>)
+            self.delegate?.updateContent(temp as! Array<GiphyModel>)
         })
     }
     
-    func selectItem(param: GiphyModel, target: UINavigationController) {
+    func selectItem(_ param: GiphyModel, _ target: UINavigationController) {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let detailController = storyboard.instantiateViewController(withIdentifier: "DetailController") as! DetailController
         detailController.content = param
