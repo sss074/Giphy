@@ -2,4 +2,134 @@
 <Bucket
    type = "0"
    version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Giphy/Other/DataManager.swift"
+            timestampString = "531323569.964439"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "112"
+            endingLineNumber = "112"
+            landmarkName = "updateThmblItem(_:_:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Giphy/Other/DataManager.swift"
+            timestampString = "531323569.964537"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "87"
+            endingLineNumber = "87"
+            landmarkName = "getItems()"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Giphy.DataManager.getItems() -&gt; Swift.Optional&lt;Swift.Array&lt;Giphy.GiphyModel&gt;&gt;"
+                  moduleName = "Giphy"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/RATEL/Documents/Works/Test/Giphy/Giphy/Other/DataManager.swift"
+                  timestampString = "531323570.127148"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "87"
+                  endingLineNumber = "87"
+                  offsetFromSymbolStart = "4171">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Giphy.DataManager.getItems() -&gt; Swift.Optional&lt;Swift.Array&lt;Giphy.GiphyModel&gt;&gt;"
+                  moduleName = "Giphy"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/RATEL/Documents/Works/Test/Giphy/Giphy/Other/DataManager.swift"
+                  timestampString = "531323570.130802"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "87"
+                  endingLineNumber = "87"
+                  offsetFromSymbolStart = "7934">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Giphy/Other/DataManager.swift"
+            timestampString = "531323569.964615"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "90"
+            endingLineNumber = "90"
+            landmarkName = "getItems()"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Giphy.DataManager.getItems() -&gt; Swift.Optional&lt;Swift.Array&lt;Giphy.GiphyModel&gt;&gt;"
+                  moduleName = "Giphy"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/RATEL/Documents/Works/Test/Giphy/Giphy/Other/DataManager.swift"
+                  timestampString = "531323570.142534"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "90"
+                  endingLineNumber = "90"
+                  offsetFromSymbolStart = "6218">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Giphy.DataManager.getItems() -&gt; Swift.Optional&lt;Swift.Array&lt;Giphy.GiphyModel&gt;&gt;"
+                  moduleName = "Giphy"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/RATEL/Documents/Works/Test/Giphy/Giphy/Other/DataManager.swift"
+                  timestampString = "531323570.149892"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "90"
+                  endingLineNumber = "90"
+                  offsetFromSymbolStart = "7974">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Giphy/ListController.swift"
+            timestampString = "531323569.964692"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "109"
+            endingLineNumber = "109"
+            landmarkName = "searchBarShouldBeginEditing(_:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
 </Bucket>

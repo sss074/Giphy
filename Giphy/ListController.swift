@@ -19,18 +19,21 @@ class ListController: UIViewController, CooordinatorDelegate, UISearchBarDelegat
     //MARK: - property
     @IBOutlet weak var searchBar:UISearchBar!
     @IBOutlet weak var collectionView:UICollectionView!
-    var lisContent: NSMutableArray! = NSMutableArray()
+    var lisContent = NSMutableArray()
     fileprivate let reuseIdentifier = "ListCell"
     
     
     //MARK: -
+    
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
   
         title = "GIPHY SEARCH"
         clearSearchBar(searchBar)
-        Cooordinator.sharedInstance.listContent(Constants.SEARCHEMPTY)
+        checkContent()
+  
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -57,6 +60,18 @@ class ListController: UIViewController, CooordinatorDelegate, UISearchBarDelegat
     }
  
     //MARK: -  Private methods
+    
+    fileprivate func checkContent() {
+        let content = DataManager.sharedInstance.getItems() as! Array<GiphyModel>
+        if content.count > 0{
+            lisContent .addObjects(from: content)
+            self.collectionView.reloadData()
+        } else {
+            if self.isInternetAvailable() {
+                Cooordinator.sharedInstance.listContent(Constants.SEARCHEMPTY)
+            }
+        }
+    }
     
     fileprivate func parseSearch(_ searchBar: UISearchBar) -> String?{
         //let components = searchBar.text?.components(separatedBy: " ")
@@ -89,10 +104,15 @@ class ListController: UIViewController, CooordinatorDelegate, UISearchBarDelegat
         searchBar.resignFirstResponder()
     }
    
-
-    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
+    private func searchBarShouldBeginEditing(_ searchBar: UISearchBar) {
         clearSearchBar(searchBar)
+        if !self.isInternetAvailable() {
+            let alert = UIAlertController(title: "Error", message: "No internet connection", preferredStyle: UIAlertControllerStyle.alert)
+            alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.default, handler: nil))
+            self.present(alert, animated: true, completion: nil)
+        }
     }
+
     
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar){
         searchBar.resignFirstResponder()
@@ -108,13 +128,13 @@ class ListController: UIViewController, CooordinatorDelegate, UISearchBarDelegat
 
      internal func collectionView(_ collectionView: UICollectionView,
                                  numberOfItemsInSection section: Int) -> Int {
-        return lisContent!.count
+        return lisContent.count
     }
 
     internal func collectionView(_ collectionView: UICollectionView,
                                  cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! ListCell
-        cell.displayContent(content:lisContent![indexPath.row] as! GiphyModel)
+        cell.displayContent(content:lisContent[indexPath.row] as! GiphyModel)
 
         return cell
     }

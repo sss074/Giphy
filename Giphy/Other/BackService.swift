@@ -8,6 +8,7 @@
 
 import UIKit
 
+
 class BackService: NSObject {
 
     static let sharedInstance = BackService()
@@ -26,27 +27,35 @@ class BackService: NSObject {
             print(response ?? "")
             print(data ?? "")
             
-            do{
-                if let responseObj = try JSONSerialization.jsonObject(with: data!, options: .allowFragments) as? NSDictionary{
-                    
-                    if JSONSerialization.isValidJSONObject(responseObj){
-                        let data = responseObj["data"]
-                        completion(data as! NSArray)
-                    }
-                    else{
-                        if let jsonString = NSString(data: data!, encoding: String.Encoding.utf8.rawValue) {
-                            print("JSON: \n\n \(jsonString)")
-                        }
-                        fatalError("Can't parse JSON \(String(describing: error))")
-                    }
-                }
-                
+            if (error != nil) {
+                print(error ?? "")
             }
-            catch let error as NSError {
-                print("An error occurred: \(error)") }
+            else {
+                do{
+                    
+                    if let responseObj = try JSONSerialization.jsonObject(with: (data)!, options: .allowFragments) as? NSDictionary{
+                        
+                        if JSONSerialization.isValidJSONObject(responseObj){
+                            let data = responseObj["data"]
+                            completion(data as! NSArray)
+                        }
+                        else{
+                            if let jsonString = NSString(data: data!, encoding: String.Encoding.utf8.rawValue) {
+                                print("JSON: \n\n \(jsonString)")
+                            }
+                            fatalError("Can't parse JSON \(String(describing: error))")
+                        }
+                    }
+                    
+                }
+                catch let error as NSError {
+                    print("An error occurred: \(error)") }
+            }
         })
+        
         task.resume()
         
     }
+    
     
 }

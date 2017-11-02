@@ -2,7 +2,7 @@
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="13241" systemVersion="16G29" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="GiphyData" representedClassName="GiphyData" syncable="YES" codeGenerationType="class">
         <attribute name="gifImg" optional="YES" attributeType="Binary" syncable="YES"/>
-        <attribute name="id" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="id" optional="YES" attributeType="String" defaultValueString="nil" syncable="YES"/>
         <attribute name="imagelink" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="thublImg" optional="YES" attributeType="Binary" syncable="YES"/>
         <attribute name="time" optional="YES" attributeType="String" syncable="YES"/>

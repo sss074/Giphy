@@ -30,7 +30,9 @@ class ListCell: UICollectionViewCell {
             
         }) { (image, data, error, cached, finished, url) in
             if (error == nil && (image != nil) && finished) {
-                self.imageView?.image = image
+                DispatchQueue.main.async {
+                    self.imageView?.image = image
+                }
             }
         }
     }

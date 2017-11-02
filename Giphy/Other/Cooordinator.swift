@@ -24,6 +24,7 @@ class Cooordinator: NSObject, ListControllerDelegate {
                 temp .add(GiphyModel(param: obj as! NSDictionary))
             }
             self.delegate?.updateContent(temp as! Array<GiphyModel>)
+            DataManager.sharedInstance.saveItems(temp as! Array<GiphyModel>)
         })
     }
     
