@@ -13,7 +13,7 @@ import SDWebImage
 class DataManager: NSObject {
     
     static let sharedInstance = DataManager()
-    var operationQueue:OperationQueue!
+
     
     //MARK: - CoreData stack
     
@@ -50,19 +50,14 @@ class DataManager: NSObject {
         managedObjectContext.persistentStoreCoordinator = coordinator
         return managedObjectContext
     }()
-    
-    override init() {
-        super.init()
-        operationQueue = OperationQueue()
-    }
+
     //MARK: - Public methods
     
     func saveItems(_ content : Array<GiphyModel>){
-        
-        operationQueue.cancelAllOperations()
+
         self.removeItems()
         for obj in content{
-            var item = NSEntityDescription.insertNewObject(forEntityName: "GiphyData",
+            let item = NSEntityDescription.insertNewObject(forEntityName: "GiphyData",
                                                            into: self.managedObjectContext) as! GiphyData
             item.id = obj.id;
             item.imagelink = obj.imageUrl
@@ -70,6 +65,8 @@ class DataManager: NSObject {
             
         }
         self.saveContext()
+        self.loadTmbls(content)
+        self.loadGif(content)
     }
     func getItems() -> (Array<GiphyModel>?){
         
@@ -122,7 +119,21 @@ class DataManager: NSObject {
     }
     
     func updateGifItem(_ image : UIImage, _ item: GiphyModel){
-        
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "GiphyData")
+        do {
+            let results = try self.managedObjectContext.fetch(fetchRequest)
+            let data = UIImagePNGRepresentation(image) as NSData?
+            for obj in results as! [NSManagedObject] {
+                if item.id == obj.value(forKey: "id") as! String{
+                    obj.setValue(data, forKey: "gifImg")
+                    break
+                }
+            }
+            self.saveContext()
+        } catch {
+            print(error)
+            
+        }
         
     }
     
@@ -154,11 +165,13 @@ class DataManager: NSObject {
     
     fileprivate func loadTmbls (_ content:Array<GiphyModel>){
         
-        let operations = NSMutableArray()
-        var pos = 0;
+        
+        let serialQueue: DispatchQueue = DispatchQueue(label: "com.iosbrain.SerialImageQueue")
         
         for obj in content{
-            let operation : BlockOperation = BlockOperation (block: {
+            
+            serialQueue.sync {
+                
                 let manager:SDWebImageManager = SDWebImageManager.shared()
                 let requestURL:NSURL = URL(string:obj.imageUrl)! as NSURL
                 
@@ -171,15 +184,26 @@ class DataManager: NSObject {
                         }
                     }
                 }
-            })
-            operations.add(operation)
-            pos += 1
-            if pos > 0 {
-                let opCur = operations.object(at: pos) as! BlockOperation
-                let opLast = operations.object(at: pos - 1) as! BlockOperation
-                opCur.addDependency(opLast)
+                
             }
-            operationQueue.addOperation(operation)
+        }
+    }
+    
+    fileprivate func loadGif (_ content:Array<GiphyModel>){
+        
+        
+        let serialQueue: DispatchQueue = DispatchQueue(label: "com.iosbrain.SerialGifImageQueue")
+        
+        for obj in content{
+            
+            serialQueue.sync {
+                let imageURL = UIImage.gifImageWithURL(obj.imageUrl!)
+                DispatchQueue.main.async {
+                    let image = UIImageView(image: imageURL).image
+                    self.updateGifItem(image!, obj)
+                }
+            }
         }
     }
 }
+

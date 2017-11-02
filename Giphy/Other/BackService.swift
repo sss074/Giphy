@@ -32,7 +32,6 @@ class BackService: NSObject {
             }
             else {
                 do{
-                    
                     if let responseObj = try JSONSerialization.jsonObject(with: (data)!, options: .allowFragments) as? NSDictionary{
                         
                         if JSONSerialization.isValidJSONObject(responseObj){

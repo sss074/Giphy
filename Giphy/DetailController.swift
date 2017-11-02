@@ -24,10 +24,14 @@ class DetailController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
-        let operation : BlockOperation = BlockOperation (block: {
-            self.loadGif()
-        })
-        operationQueue.addOperation(operation)
+        if content.imageThmbl != nil{
+            self.imageView?.image = content.imageGif
+        } else {
+            let operation : BlockOperation = BlockOperation (block: {
+                self.loadGif()
+            })
+            operationQueue.addOperation(operation)
+        }
 
     }
     override func viewWillDisappear(_ animated: Bool) {

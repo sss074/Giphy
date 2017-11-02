@@ -23,15 +23,19 @@ class ListCell: UICollectionViewCell {
         
         timeLabel?.text = content.import_datetime
         
-        let manager:SDWebImageManager = SDWebImageManager.shared()
-        let requestURL:NSURL = URL(string:content.imageUrl)! as NSURL
-       
-        manager.loadImage(with: requestURL as URL, options: SDWebImageOptions.highPriority, progress: { (start, progress, url) in
+        if content.imageThmbl != nil{
+            self.imageView?.image = content.imageThmbl
+        } else {
+            let manager:SDWebImageManager = SDWebImageManager.shared()
+            let requestURL:NSURL = URL(string:content.imageUrl)! as NSURL
             
-        }) { (image, data, error, cached, finished, url) in
-            if (error == nil && (image != nil) && finished) {
-                DispatchQueue.main.async {
-                    self.imageView?.image = image
+            manager.loadImage(with: requestURL as URL, options: SDWebImageOptions.highPriority, progress: { (start, progress, url) in
+                
+            }) { (image, data, error, cached, finished, url) in
+                if (error == nil && (image != nil) && finished) {
+                    DispatchQueue.main.async {
+                        self.imageView?.image = image
+                    }
                 }
             }
         }

@@ -74,7 +74,7 @@ class ListController: UIViewController, CooordinatorDelegate, UISearchBarDelegat
     }
     
     fileprivate func parseSearch(_ searchBar: UISearchBar) -> String?{
-        //let components = searchBar.text?.components(separatedBy: " ")
+
         var appendString: String = ""
 
         guard let components = searchBar.text?.components(separatedBy: " ") else {
@@ -104,13 +104,15 @@ class ListController: UIViewController, CooordinatorDelegate, UISearchBarDelegat
         searchBar.resignFirstResponder()
     }
    
-    private func searchBarShouldBeginEditing(_ searchBar: UISearchBar) {
+    internal func searchBarShouldBeginEditing(_ searchBar: UISearchBar) -> Bool{
         clearSearchBar(searchBar)
         if !self.isInternetAvailable() {
             let alert = UIAlertController(title: "Error", message: "No internet connection", preferredStyle: UIAlertControllerStyle.alert)
             alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.default, handler: nil))
             self.present(alert, animated: true, completion: nil)
+            return false
         }
+        return true
     }
 
     
