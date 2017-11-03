@@ -150,8 +150,8 @@ class ListController: UIViewController, CooordinatorDelegate, UISearchBarDelegat
         Cooordinator.sharedInstance.selectItem(obj, self.navigationController!)
     }
     func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
-        let cell = collectionView .cellForItem(at: indexPath) as! ListCell
-        cell.toggleSelected()
+        let cell = collectionView .cellForItem(at: indexPath) as? ListCell
+        cell?.toggleSelected()
     }
     
     func collectionView(_ collectionView: UICollectionView,
