@@ -48,6 +48,15 @@
                                             <rect key="frame" x="0.0" y="0.0" width="123" height="123"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3nL-cZ-VL0">
+                                                    <rect key="frame" x="12" y="0.0" width="99" height="100"/>
+                                                    <color key="backgroundColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <userDefinedRuntimeAttributes>
+                                                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                            <integer key="value" value="7"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                    </userDefinedRuntimeAttributes>
+                                                </view>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zet-ej-caH" customClass="gip">
                                                     <rect key="frame" x="0.0" y="97" width="123" height="21"/>
                                                     <constraints>
@@ -59,19 +68,29 @@
                                                 </label>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="iyf-Ue-rm3">
                                                     <rect key="frame" x="17" y="5" width="89" height="90"/>
+                                                    <userDefinedRuntimeAttributes>
+                                                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                            <integer key="value" value="5"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                    </userDefinedRuntimeAttributes>
                                                 </imageView>
                                             </subviews>
                                         </view>
                                         <constraints>
+                                            <constraint firstAttribute="trailing" secondItem="3nL-cZ-VL0" secondAttribute="trailing" constant="12" id="8RG-or-8JJ"/>
                                             <constraint firstAttribute="trailing" secondItem="iyf-Ue-rm3" secondAttribute="trailing" constant="17" id="DAi-oK-iMN"/>
                                             <constraint firstAttribute="trailing" secondItem="Zet-ej-caH" secondAttribute="trailing" id="Gdy-Yv-bwh"/>
+                                            <constraint firstItem="3nL-cZ-VL0" firstAttribute="top" secondItem="Tm5-7v-nWk" secondAttribute="top" id="HOK-S6-jhO"/>
+                                            <constraint firstAttribute="bottom" secondItem="3nL-cZ-VL0" secondAttribute="bottom" constant="23" id="IZH-M3-t50"/>
                                             <constraint firstItem="iyf-Ue-rm3" firstAttribute="top" secondItem="Tm5-7v-nWk" secondAttribute="top" constant="5" id="Shp-B7-WY5"/>
                                             <constraint firstItem="Zet-ej-caH" firstAttribute="leading" secondItem="Tm5-7v-nWk" secondAttribute="leading" id="XuR-Qa-fbB"/>
                                             <constraint firstItem="Zet-ej-caH" firstAttribute="top" secondItem="iyf-Ue-rm3" secondAttribute="bottom" constant="2" id="aRb-ro-5Ah"/>
+                                            <constraint firstItem="3nL-cZ-VL0" firstAttribute="leading" secondItem="Tm5-7v-nWk" secondAttribute="leading" constant="12" id="dcu-ra-YLQ"/>
                                             <constraint firstAttribute="bottom" secondItem="Zet-ej-caH" secondAttribute="bottom" constant="5" id="hQS-pp-nuG"/>
                                             <constraint firstItem="iyf-Ue-rm3" firstAttribute="leading" secondItem="Tm5-7v-nWk" secondAttribute="leading" constant="17" id="pZc-CP-XiP"/>
                                         </constraints>
                                         <connections>
+                                            <outlet property="borderView" destination="3nL-cZ-VL0" id="lBc-In-oBk"/>
                                             <outlet property="imageView" destination="iyf-Ue-rm3" id="ZbM-2U-kqd"/>
                                             <outlet property="timeLabel" destination="Zet-ej-caH" id="nqm-i5-4Y0"/>
                                         </connections>

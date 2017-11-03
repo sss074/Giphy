@@ -13,10 +13,12 @@ class ListCell: UICollectionViewCell {
     
     @IBOutlet weak var imageView:UIImageView?
     @IBOutlet weak var timeLabel:UILabel?
+    @IBOutlet weak var borderView:UIView?
     
     override func awakeFromNib() {
         super.awakeFromNib()
         self.backgroundColor = UIColor.white
+        borderView?.isHidden = true
     }
     
     func displayContent(content: GiphyModel) {
@@ -40,5 +42,8 @@ class ListCell: UICollectionViewCell {
             }
         }
     }
-    
+    func toggleSelected () {
+        borderView?.isHidden = !isSelected
+    }
+   
 }

@@ -6,10 +6,12 @@
 //  Copyright © 2017 SBApps. All rights reserved.
 //
 
-import Foundation
+
+import UIKit
 import SystemConfiguration
 
 extension NSObject {
+  
     func isInternetAvailable() -> Bool
     {
         var zeroAddress = sockaddr_in()
@@ -31,3 +33,36 @@ extension NSObject {
         return (isReachable && !needsConnection)
     }
 }
+
+extension UIView {
+    
+    @IBInspectable var cornerRadius: CGFloat {
+        
+        get{
+            return layer.cornerRadius
+        }
+        set {
+            layer.cornerRadius = newValue
+            layer.masksToBounds = newValue > 0
+        }
+    }
+    
+    @IBInspectable var borderWidth: CGFloat {
+        get {
+            return layer.borderWidth
+        }
+        set {
+            layer.borderWidth = newValue
+        }
+    }
+    
+    @IBInspectable var borderColor: UIColor? {
+        get {
+            return UIColor(cgColor: layer.borderColor!)
+        }
+        set {
+            layer.borderColor = borderColor?.cgColor
+        }
+    }
+}
+

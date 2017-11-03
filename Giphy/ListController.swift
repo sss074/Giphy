@@ -143,10 +143,16 @@ class ListController: UIViewController, CooordinatorDelegate, UISearchBarDelegat
     
     internal func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath){
         
+        let cell = collectionView .cellForItem(at: indexPath) as! ListCell
+        cell.toggleSelected()
+        
         let  obj:GiphyModel = lisContent[indexPath.row] as! GiphyModel
         Cooordinator.sharedInstance.selectItem(obj, self.navigationController!)
     }
-    
+    func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
+        let cell = collectionView .cellForItem(at: indexPath) as! ListCell
+        cell.toggleSelected()
+    }
     
     func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,
@@ -167,5 +173,7 @@ class ListController: UIViewController, CooordinatorDelegate, UISearchBarDelegat
                         minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         return 0.0
     }
+    
+    
 }
 
