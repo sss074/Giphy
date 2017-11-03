@@ -18,7 +18,8 @@ class Constants {
     
     func createRequestStr(param:String) -> String
     {
-        return "\(Constants.BASE_URL)?q=\(param)&api_key=\(Constants.API_KEY)"
+        let encoded =   param.addingPercentEncoding(withAllowedCharacters: .urlFragmentAllowed)
+        return "\(Constants.BASE_URL)?q=\(encoded!)&api_key=\(Constants.API_KEY)"
     }
     
 }
