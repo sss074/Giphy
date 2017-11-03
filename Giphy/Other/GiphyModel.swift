@@ -17,8 +17,7 @@ class GiphyModel: NSObject {
     var import_datetime: String!
     var imageThmbl: UIImage?
     var imageGif: UIImage?
-    
-    
+
     fileprivate func formatTime(_ param: NSDictionary) {
         let dateFormatter = DateFormatter()
         let dateString = param["import_datetime"] as? String

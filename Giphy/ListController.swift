@@ -25,8 +25,7 @@ class ListController: UIViewController, CooordinatorDelegate, UISearchBarDelegat
     
     
     //MARK: -
-    
-    
+ 
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -72,8 +71,7 @@ class ListController: UIViewController, CooordinatorDelegate, UISearchBarDelegat
     }
     
     fileprivate func checkContent() {
-        let content = DataManager.sharedInstance.getItems() as! Array<GiphyModel>
-        
+        let content : Array<GiphyModel>! = DataManager.sharedInstance.getItems()
         
         if content.count > 0{
             lisContent .addObjects(from: content)
