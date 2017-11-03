@@ -21,6 +21,7 @@ class ListController: UIViewController, CooordinatorDelegate, UISearchBarDelegat
     @IBOutlet weak var collectionView:UICollectionView!
     var lisContent = NSMutableArray()
     fileprivate let reuseIdentifier = "ListCell"
+    fileprivate var index : IndexPath!
     
     
     //MARK: -
@@ -30,6 +31,7 @@ class ListController: UIViewController, CooordinatorDelegate, UISearchBarDelegat
     override func viewDidLoad() {
         super.viewDidLoad()
   
+        index = IndexPath(row:0, section:0)
         title = "GIPHY SEARCH"
         clearSearchBar(searchBar)
         checkContent()
@@ -53,7 +55,7 @@ class ListController: UIViewController, CooordinatorDelegate, UISearchBarDelegat
     func updateContent(_ content: Array<GiphyModel>) {
         lisContent.removeAllObjects()
         lisContent.addObjects(from: content)
-        print(lisContent ?? "")
+        print(lisContent)
         DispatchQueue.main.async {
             self.collectionView.reloadData()
         }
@@ -61,8 +63,18 @@ class ListController: UIViewController, CooordinatorDelegate, UISearchBarDelegat
  
     //MARK: -  Private methods
     
+    fileprivate func deselectCell() {
+        let cell = collectionView .cellForItem(at: index) as? ListCell
+        if(cell?.isSelected)!{
+            cell?.isSelected = false
+            cell?.toggleSelected()
+        }
+    }
+    
     fileprivate func checkContent() {
         let content = DataManager.sharedInstance.getItems() as! Array<GiphyModel>
+        
+        
         if content.count > 0{
             lisContent .addObjects(from: content)
             self.collectionView.reloadData()
@@ -98,8 +110,9 @@ class ListController: UIViewController, CooordinatorDelegate, UISearchBarDelegat
     }
     
     //MARK: -  UISearchBar delagate
-    
+
     internal func searchBarSearchButtonClicked(_ searchBar: UISearchBar){
+        deselectCell()
         Cooordinator.sharedInstance.listContent(parseSearch(searchBar)!)
         searchBar.resignFirstResponder()
     }
@@ -119,6 +132,7 @@ class ListController: UIViewController, CooordinatorDelegate, UISearchBarDelegat
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar){
         searchBar.resignFirstResponder()
         clearSearchBar(searchBar)
+        deselectCell()
         Cooordinator.sharedInstance.listContent(Constants.SEARCHEMPTY)
     }
     
@@ -143,6 +157,7 @@ class ListController: UIViewController, CooordinatorDelegate, UISearchBarDelegat
     
     internal func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath){
         
+        index = indexPath
         let cell = collectionView .cellForItem(at: indexPath) as! ListCell
         cell.toggleSelected()
         
