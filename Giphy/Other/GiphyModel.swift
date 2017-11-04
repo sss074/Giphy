@@ -47,7 +47,7 @@ class GiphyModel: NSObject {
         model = GifModel()
     }
     
-    init(param: NSDictionary) {
+    init(_ param: NSDictionary) {
         
         super.init()
 

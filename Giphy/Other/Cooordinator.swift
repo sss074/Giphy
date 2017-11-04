@@ -21,7 +21,14 @@ class Cooordinator: NSObject, ListControllerDelegate {
     
     func listContent(_ param: String){
         DataManager.sharedInstance.getContent(param: param, completion: { (result: AnyObject) in
-            let obj = ModelBuilder().gifModel(result)
+            let responseObj = result as? NSDictionary
+            let data = responseObj!["data"] as! NSArray
+            let temp = NSMutableArray()
+            for obj in data {
+                temp .add(ModelBuilder().gifModel(obj as AnyObject))
+            }
+            let obj = temp as! Array<GiphyModel>
+            DataManager.sharedInstance.saveItems(obj)
             self.delegate?.updateContent(obj)
         })
     }
