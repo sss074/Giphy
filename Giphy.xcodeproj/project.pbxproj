@@ -23,6 +23,7 @@
 		EFC701B61FAB224D0000CBA3 /* Giphy.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = EFC701B41FAB224D0000CBA3 /* Giphy.xcdatamodeld */; };
 		EFC701C01FAB24E80000CBA3 /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFC701BF1FAB24E80000CBA3 /* DataManager.swift */; };
 		EFC701C21FAB44820000CBA3 /* Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFC701C11FAB44810000CBA3 /* Helper.swift */; };
+		EFD9FD6F1FAD950D00F7E0B0 /* ModelBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFD9FD6E1FAD950D00F7E0B0 /* ModelBuilder.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -46,6 +47,7 @@
 		EFC701B51FAB224D0000CBA3 /* Giphy.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Giphy.xcdatamodel; sourceTree = "<group>"; };
 		EFC701BF1FAB24E80000CBA3 /* DataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
 		EFC701C11FAB44810000CBA3 /* Helper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helper.swift; sourceTree = "<group>"; };
+		EFD9FD6E1FAD950D00F7E0B0 /* ModelBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelBuilder.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -117,8 +119,9 @@
 			isa = PBXGroup;
 			children = (
 				EF6E85831FAA0F060042FE3C /* Cooordinator.swift */,
-				EF6E85851FAA0F360042FE3C /* BackService.swift */,
 				EFC701BF1FAB24E80000CBA3 /* DataManager.swift */,
+				EF6E85851FAA0F360042FE3C /* BackService.swift */,
+				EFD9FD6E1FAD950D00F7E0B0 /* ModelBuilder.swift */,
 				EF6E85871FAA15DD0042FE3C /* GiphyModel.swift */,
 				EF2C114F1FAA418D00F7617D /* Constants.swift */,
 			);
@@ -281,6 +284,7 @@
 				EFC701B01FAA843A0000CBA3 /* ListCell.swift in Sources */,
 				EF6E857F1FAA06520042FE3C /* iOSDevCenters+GIF.swift in Sources */,
 				EFC701B61FAB224D0000CBA3 /* Giphy.xcdatamodeld in Sources */,
+				EFD9FD6F1FAD950D00F7E0B0 /* ModelBuilder.swift in Sources */,
 				EFC701C01FAB24E80000CBA3 /* DataManager.swift in Sources */,
 				EFC701B21FAA8E510000CBA3 /* DetailController.swift in Sources */,
 				EF6E856B1FAA04000042FE3C /* AppDelegate.swift in Sources */,

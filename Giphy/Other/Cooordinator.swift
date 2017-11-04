@@ -16,15 +16,13 @@ class Cooordinator: NSObject, ListControllerDelegate {
 
     static let sharedInstance = Cooordinator()
     weak var delegate: CooordinatorDelegate?
+  
+    
     
     func listContent(_ param: String){
-        BackService.sharedInstance.data_request(param: param, completion: { (result: NSArray) in
-            let temp = NSMutableArray()
-            for obj in result {
-                temp .add(GiphyModel(param: obj as! NSDictionary))
-            }
-            self.delegate?.updateContent(temp as! Array<GiphyModel>)
-            DataManager.sharedInstance.saveItems(temp as! Array<GiphyModel>)
+        DataManager.sharedInstance.getContent(param: param, completion: { (result: AnyObject) in
+            let obj = ModelBuilder().gifModel(result)
+            self.delegate?.updateContent(obj)
         })
     }
     

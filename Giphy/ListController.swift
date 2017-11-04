@@ -64,9 +64,11 @@ class ListController: UIViewController, CooordinatorDelegate, UISearchBarDelegat
     
     fileprivate func deselectCell() {
         let cell = collectionView .cellForItem(at: index) as? ListCell
-        if(cell?.isSelected)!{
-            cell?.isSelected = false
-            cell?.toggleSelected()
+        if(cell != nil){
+            if(cell?.isSelected)!{
+                cell?.isSelected = false
+                cell?.toggleSelected()
+            }
         }
     }
     

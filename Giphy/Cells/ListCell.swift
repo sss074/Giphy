@@ -23,13 +23,13 @@ class ListCell: UICollectionViewCell {
     
     func displayContent(content: GiphyModel) {
         
-        timeLabel?.text = content.import_datetime
+        timeLabel?.text = content.model.import_datetime
         
-        if content.imageThmbl != nil{
-            self.imageView?.image = content.imageThmbl
+        if content.model.imageThmbl != nil{
+            self.imageView?.image = content.model.imageThmbl
         } else {
             let manager:SDWebImageManager = SDWebImageManager.shared()
-            let requestURL:NSURL = URL(string:content.imageUrl)! as NSURL
+            let requestURL:NSURL = URL(string:content.model.imageUrl)! as NSURL
             
             manager.loadImage(with: requestURL as URL, options: SDWebImageOptions.highPriority, progress: { (start, progress, url) in
                 

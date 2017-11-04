@@ -59,6 +59,7 @@ class DataManager: NSObject {
         queueGif = OperationQueue()
         queueGif.maxConcurrentOperationCount = 1;
     }
+    
     //MARK: - Public methods
     
     func saveItems(_ content : Array<GiphyModel>){
@@ -70,9 +71,9 @@ class DataManager: NSObject {
         for obj in content{
             let item = NSEntityDescription.insertNewObject(forEntityName: "GiphyData",
                                                            into: self.managedObjectContext) as! GiphyData
-            item.id = obj.id;
-            item.imagelink = obj.imageUrl
-            item.time = obj.import_datetime;
+            item.id = obj.model.id;
+            item.imagelink = obj.model.imageUrl
+            item.time = obj.model.import_datetime;
             
         }
         self.saveContext()
@@ -88,14 +89,14 @@ class DataManager: NSObject {
             
             for obj in results as! [NSManagedObject] {
                 let item:GiphyModel = GiphyModel()
-                item.id = obj.value(forKey: "id") as! String
-                item.import_datetime = obj.value(forKey: "time") as! String
-                item.imageUrl = obj.value(forKey: "imagelink") as! String
+                item.model.id = obj.value(forKey: "id") as! String
+                item.model.import_datetime = obj.value(forKey: "time") as! String
+                item.model.imageUrl = obj.value(forKey: "imagelink") as! String
                 if (obj.value(forKey: "thublImg") as? Data) != nil{
-                    item.imageThmbl = UIImage(data: (obj.value(forKey: "thublImg") as? Data)!)
+                    item.model.imageThmbl = UIImage(data: (obj.value(forKey: "thublImg") as? Data)!)
                 }
                 if (obj.value(forKey: "gifImg") as? Data) != nil{
-                    item.imageGif = UIImage(data: (obj.value(forKey: "gifImg") as? Data)!)
+                    item.model.imageGif = UIImage(data: (obj.value(forKey: "gifImg") as? Data)!)
                 }
                 
                 temp .add(item)
@@ -116,7 +117,7 @@ class DataManager: NSObject {
             let results = try self.managedObjectContext.fetch(fetchRequest)
             let data = UIImagePNGRepresentation(image) as NSData?
             for obj in results as! [NSManagedObject] {
-                if item.id == obj.value(forKey: "id") as! String{
+                if item.model.id == obj.value(forKey: "id") as! String{
                     obj.setValue(data, forKey: "thublImg")
                     break
                 }
@@ -135,7 +136,7 @@ class DataManager: NSObject {
             let results = try self.managedObjectContext.fetch(fetchRequest)
             let data = UIImagePNGRepresentation(image) as NSData?
             for obj in results as! [NSManagedObject] {
-                if item.id == obj.value(forKey: "id") as! String{
+                if item.model.id == obj.value(forKey: "id") as! String{
                     obj.setValue(data, forKey: "gifImg")
                     break
                 }
@@ -183,7 +184,7 @@ class DataManager: NSObject {
             
             let operation : BlockOperation = BlockOperation(block: {
                 let manager:SDWebImageManager = SDWebImageManager.shared()
-                let requestURL:NSURL = URL(string:obj.imageUrl)! as NSURL
+                let requestURL:NSURL = URL(string:obj.model.imageUrl)! as NSURL
                 
                 manager.loadImage(with: requestURL as URL, options: SDWebImageOptions.highPriority, progress: { (start, progress, url) in
                     
@@ -226,7 +227,7 @@ class DataManager: NSObject {
         
         for obj in content{
             let operation : BlockOperation = BlockOperation(block: {
-                let imageURL = UIImage.gifImageWithURL(obj.imageUrl!)
+                let imageURL = UIImage.gifImageWithURL(obj.model.imageUrl!)
                 DispatchQueue.main.async {
                     let image = UIImageView(image: imageURL).image
                     self.updateGifItem(image!, obj)
@@ -243,6 +244,17 @@ class DataManager: NSObject {
 //                }
 //            }
         }
+    }
+    
+    
+    //MARK: - BackService methods
+    
+    func getContent(param:String, completion: @escaping (_ result: AnyObject) -> Void)
+    {
+        let service = BackService()
+        service.data_request(param: param, completion: { (result: AnyObject) in
+            completion(result)
+        })
     }
 }
 

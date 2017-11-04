@@ -18,14 +18,14 @@ class DetailController: UIViewController {
         super.viewDidLoad()
 
         operationQueue = OperationQueue()
-        title = self.content.import_datetime
+        title = self.content.model.import_datetime
         
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
-        if content.imageThmbl != nil{
-            self.imageView?.image = content.imageGif
+        if content.model.imageThmbl != nil{
+            self.imageView?.image = content.model.imageGif
         } else {
             let operation : BlockOperation = BlockOperation (block: {
                 self.loadGif()
@@ -41,7 +41,7 @@ class DetailController: UIViewController {
     }
     
     func loadGif() {
-        let imageURL = UIImage.gifImageWithURL(self.content.imageUrl!)
+        let imageURL = UIImage.gifImageWithURL(self.content.model.imageUrl!)
         DispatchQueue.main.async {
             self.imageView?.image = UIImageView(image: imageURL).image
         }

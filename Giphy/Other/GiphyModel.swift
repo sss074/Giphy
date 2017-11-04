@@ -8,15 +8,20 @@
 
 import UIKit
 
-class GiphyModel: NSObject {
-   
-    //MARK: Properties
-    
+struct GifModel {
     var id: String!
     var imageUrl: String!
     var import_datetime: String!
     var imageThmbl: UIImage?
     var imageGif: UIImage?
+}
+
+class GiphyModel: NSObject {
+   
+    //MARK: Properties
+    
+    var model : GifModel!
+
 
     fileprivate func formatTime(_ param: NSDictionary) {
         let dateFormatter = DateFormatter()
@@ -25,7 +30,7 @@ class GiphyModel: NSObject {
         dateFormatter.dateFormat = "yyyy-MM-dd"
         let dateObj = dateFormatter.date(from: components![0])
         dateFormatter.dateStyle = DateFormatter.Style.medium
-        self.import_datetime = dateFormatter.string(from: dateObj!)
+        model.import_datetime = dateFormatter.string(from: dateObj!)
     }
     
     fileprivate func formatUrlImage(_ param: NSDictionary) {
@@ -33,18 +38,21 @@ class GiphyModel: NSObject {
         if(images != nil){
             let original = images!["original"] as? NSDictionary
             if(original != nil){
-                self.imageUrl = original!["url"] as? String
+                model.imageUrl = original!["url"] as? String
             }
         }
     }
     
     override init() {
+        model = GifModel()
     }
+    
     init(param: NSDictionary) {
         
         super.init()
-        
-        self.id = param["id"] as? String
+
+        model = GifModel()
+        model.id = param["id"] as? String
         formatTime(param)
         formatUrlImage(param)
     }
